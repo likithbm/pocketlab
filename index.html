@@ -1,0 +1,1090 @@
+=
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080f20">
+  <title>PocketLab 3.0 | STEM Virtual Laboratory</title>
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    .hidden,
+    .page:not(.active) {
+      display: none !important;
+    }
+
+    .pl-subject-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 20px 0;
+    }
+
+    .pl-subject-tabs button {
+      background: #132744;
+      color: #d9edff;
+      border: 1px solid #315a85;
+      border-radius: 10px;
+      padding: 11px 17px;
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .pl-subject-tabs button:hover {
+      background: #21538b;
+      border-color: #5dc9ff;
+    }
+
+    .pl-physics-banner {
+      padding: 25px;
+      border-radius: 18px;
+      background:
+        radial-gradient(
+          circle at 85% 20%,
+          rgba(35, 140, 255, .25),
+          transparent 45%
+        ),
+        linear-gradient(135deg, #102a4b, #091426);
+      border: 1px solid #32618d;
+      margin-bottom: 22px;
+    }
+
+    .pl-physics-banner h2 {
+      margin: 8px 0;
+      color: #f0f8ff;
+    }
+
+    .pl-physics-banner p {
+      color: #a8c2dd;
+      line-height: 1.6;
+    }
+
+    .pl-physics-banner .eyebrow {
+      color: #66dfff;
+    }
+
+    .hero-highlights {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .hero-highlights span {
+      border: 1px solid rgba(150, 200, 255, .2);
+      background: rgba(255, 255, 255, .06);
+      border-radius: 20px;
+      padding: 8px 12px;
+      font-size: 12px;
+      color: #dbeaff;
+    }
+
+    .discovery-strip {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin: 24px 0;
+    }
+
+    .discovery-item {
+      padding: 17px;
+      background: #14243d;
+      border: 1px solid #294566;
+      border-radius: 14px;
+    }
+
+    .discovery-item strong,
+    .discovery-item small {
+      display: block;
+    }
+
+    .discovery-item small {
+      margin-top: 6px;
+      color: #9eb4cf;
+    }
+
+    .lab-tip {
+      padding: 14px;
+      border: 1px solid #2c5578;
+      border-radius: 12px;
+      background: #10243b;
+      color: #c2d9ef;
+      margin-bottom: 20px;
+    }
+
+    @media (max-width: 800px) {
+      .discovery-strip {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- SIDEBAR -->
+
+  <aside class="sidebar">
+
+    <div class="brand">
+      <div class="brand-icon">⚗️</div>
+      <div>
+        <h2>PocketLab</h2>
+        <small>SCIENCE BEYOND CLASSROOMS</small>
+      </div>
+    </div>
+
+    <div class="sidebar-label">WORKSPACE</div>
+
+    <nav class="nav-menu">
+
+      <button class="nav-item active"
+              data-page="dashboard">
+        <span>▦</span> Dashboard
+      </button>
+
+      <button class="nav-item"
+              data-page="laboratory">
+        <span>⚗</span> Virtual Laboratory
+      </button>
+
+      <button class="nav-item"
+              data-page="subjects">
+        <span>▤</span> STEM Subjects
+      </button>
+
+      <button class="nav-item"
+              data-page="quiz">
+        <span>✦</span> Quiz Arena
+      </button>
+
+      <button class="nav-item"
+              data-page="achievements">
+        <span>🏆</span> Achievements
+      </button>
+
+    </nav>
+
+    <div class="sidebar-bottom">
+
+      <div class="offline-card">
+        <span class="status-dot"></span>
+        <strong id="connectionStatus">
+          Checking connection...
+        </strong>
+        <p>Learning beyond internet barriers.</p>
+      </div>
+
+      <p class="sidebar-footer">
+        STEM FOR IMPACT 2026
+      </p>
+
+    </div>
+
+  </aside>
+
+  <!-- MAIN APP -->
+
+  <div class="app-container">
+
+    <header class="topbar">
+
+      <div class="breadcrumb">
+        <span>Workspace</span>
+        <span>/</span>
+        <strong id="pageTitle">Dashboard</strong>
+      </div>
+
+      <div class="top-actions">
+
+        <span class="top-date" id="todayDate"></span>
+
+        <select id="languageSelect">
+          <option value="en">English</option>
+          <option value="kn">ಕನ್ನಡ</option>
+        </select>
+
+        <div class="avatar">ST</div>
+
+        <span class="student-name">
+          STEM Explorer
+        </span>
+
+      </div>
+
+    </header>
+
+    <main class="main-content">
+
+      <!-- DASHBOARD -->
+
+      <section id="dashboard" class="page active">
+
+        <div class="hero">
+
+          <div class="hero-content">
+
+            <div class="hero-badge">
+              ✦ POCKETLAB 3.0 · STEM FOR IMPACT
+            </div>
+
+            <h1>
+              Explore. Experiment.
+              <br>
+              <span>Understand everything.</span>
+            </h1>
+
+            <p>
+              Experience science through interactive
+              virtual laboratories, simulations,
+              quizzes and hands-on discovery.
+            </p>
+
+            <button class="primary-btn"
+                    data-go="laboratory">
+              Launch Virtual Lab →
+            </button>
+
+            <div class="hero-highlights">
+              <span>⚡ 20 Physics experiments</span>
+              <span>🧪 Four STEM subjects</span>
+              <span>🏆 Quizzes and achievements</span>
+            </div>
+
+          </div>
+
+          <div class="hero-art" aria-hidden="true">
+            <div class="orbit orbit-one"></div>
+            <div class="orbit orbit-two"></div>
+            <div class="hero-atom">⚛</div>
+            <span class="floating-icon float-one">🧪</span>
+            <span class="floating-icon float-two">💡</span>
+            <span class="floating-icon float-three">🧬</span>
+          </div>
+
+        </div>
+
+        <div class="discovery-strip">
+
+          <div class="discovery-item">
+            <strong>01 · Choose Your Level</strong>
+            <small>Learn at your own pace</small>
+          </div>
+
+          <div class="discovery-item">
+            <strong>02 · Experiment Live</strong>
+            <small>Adjust variables and observe</small>
+          </div>
+
+          <div class="discovery-item">
+            <strong>03 · Earn Achievements</strong>
+            <small>Complete challenges and quizzes</small>
+          </div>
+
+        </div>
+
+        <!-- LEARNING LEVELS -->
+
+        <section class="learning-level-section">
+
+          <div class="section-heading">
+            <div>
+              <span class="eyebrow">
+                PERSONALIZED LEARNING
+              </span>
+              <h2>Choose Your Learning Level 🎓</h2>
+            </div>
+          </div>
+
+          <p class="level-description">
+            Select your class for recommended experiments
+            and quizzes.
+          </p>
+
+          <div class="level-grid">
+
+            <button class="level-card"
+                    data-level="primary">
+              <span class="level-icon">🌱</span>
+              <strong>Class 1–5</strong>
+              <small>Little Scientists</small>
+            </button>
+
+            <button class="level-card"
+                    data-level="middle">
+              <span class="level-icon">🔬</span>
+              <strong>Class 6–8</strong>
+              <small>Young Explorers</small>
+            </button>
+
+            <button class="level-card"
+                    data-level="secondary">
+              <span class="level-icon">⚡</span>
+              <strong>Class 9–10</strong>
+              <small>STEM Champions</small>
+            </button>
+
+            <button class="level-card"
+                    data-level="senior">
+              <span class="level-icon">🧪</span>
+              <strong>Class 11–12</strong>
+              <small>Future Innovators</small>
+            </button>
+
+            <button class="level-card"
+                    data-level="college">
+              <span class="level-icon">🎓</span>
+              <strong>College</strong>
+              <small>Advanced Learners</small>
+            </button>
+
+          </div>
+
+          <p id="selectedLevelMessage"
+             class="selected-level-message">
+            Select your learning level.
+          </p>
+
+          <button class="primary-btn"
+                  data-go="laboratory">
+            Explore Experiments →
+          </button>
+
+        </section>
+
+        <!-- STATISTICS -->
+
+        <div class="section-heading">
+          <div>
+            <span class="eyebrow">
+              YOUR LEARNING JOURNEY
+            </span>
+            <h2>Learning Overview</h2>
+          </div>
+        </div>
+
+        <div class="stats-grid">
+
+          <div class="stat-card">
+            <div class="stat-icon purple">⚗</div>
+            <span>Experiments Completed</span>
+            <h2 id="experimentsCount">0</h2>
+            <small>Keep experimenting</small>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon blue">✦</div>
+            <span>Knowledge Points</span>
+            <h2 id="pointsCount">0</h2>
+            <small>Earn rewards</small>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon orange">🏆</div>
+            <span>Badges Earned</span>
+            <h2 id="badgesCount">0</h2>
+            <small>Unlock achievements</small>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon green">✓</div>
+            <span>Quizzes Completed</span>
+            <h2 id="quizzesCount">0</h2>
+            <small>Test your knowledge</small>
+          </div>
+
+        </div>
+
+        <!-- SUBJECTS -->
+
+        <div class="section-heading">
+          <div>
+            <span class="eyebrow">EXPLORE STEM</span>
+            <h2>Choose a Subject</h2>
+          </div>
+
+          <button class="text-btn" data-go="subjects">
+            View All →
+          </button>
+        </div>
+
+        <div class="subject-grid">
+
+          <button class="subject-card physics"
+                  data-subject="physics">
+            <div class="subject-emoji">⚛️</div>
+            <span>01 / EXPLORE</span>
+            <h3>Physics</h3>
+            <p>
+              Electricity, motion, energy,
+              circuits and mechanics.
+            </p>
+            <strong>Explore Physics ↗</strong>
+          </button>
+
+          <button class="subject-card chemistry"
+                  data-subject="chemistry">
+            <div class="subject-emoji">🧪</div>
+            <span>02 / DISCOVER</span>
+            <h3>Chemistry</h3>
+            <p>
+              Acids, bases, reactions and molecules.
+            </p>
+            <strong>Explore Chemistry ↗</strong>
+          </button>
+
+          <button class="subject-card biology"
+                  data-subject="biology">
+            <div class="subject-emoji">🧬</div>
+            <span>03 / UNDERSTAND</span>
+            <h3>Biology</h3>
+            <p>
+              Plants, cells and living organisms.
+            </p>
+            <strong>Explore Biology ↗</strong>
+          </button>
+
+          <button class="subject-card mathematics"
+                  data-subject="mathematics">
+            <div class="subject-emoji">📐</div>
+            <span>04 / SOLVE</span>
+            <h3>Mathematics</h3>
+            <p>
+              Graphs, geometry, functions and logic.
+            </p>
+            <strong>Explore Mathematics ↗</strong>
+          </button>
+
+        </div>
+
+      </section>
+
+      <!-- VIRTUAL LABORATORY -->
+
+      <section id="laboratory" class="page">
+
+        <div class="page-intro">
+          <span class="eyebrow">
+            POCKETLAB 3.0 · INTERACTIVE SCIENCE
+          </span>
+          <h1>Virtual Laboratory ⚗️</h1>
+          <p>
+            Explore STEM through interactive
+            scientific experiments.
+          </p>
+        </div>
+
+        <div class="pl-subject-tabs">
+          <button data-subject="physics">⚡ Physics</button>
+          <button data-subject="chemistry">🧪 Chemistry</button>
+          <button data-subject="biology">🧬 Biology</button>
+          <button data-subject="mathematics">📐 Mathematics</button>
+        </div>
+
+        <div class="pl-physics-banner">
+          <span class="eyebrow">
+            ⚡ PHYSICS VIRTUAL LABORATORY
+          </span>
+
+          <h2>Discover the Laws of Physics</h2>
+
+          <p>
+            Explore circuits, moving cars, projectiles,
+            light, electricity, magnetism, waves,
+            pendulums and much more.
+          </p>
+        </div>
+
+        <div class="lab-toolbar">
+
+          <div>
+            <h2>Experiment Collection</h2>
+            <p id="labLevelMessage">
+              Choose an experiment to begin.
+            </p>
+          </div>
+
+          <select id="experimentFilter">
+            <option value="all">All Subjects</option>
+            <option value="physics">Physics</option>
+            <option value="chemistry">Chemistry</option>
+            <option value="biology">Biology</option>
+            <option value="mathematics">Mathematics</option>
+          </select>
+
+        </div>
+
+        <div class="lab-tip">
+          💡 Adjust the controls in each experiment
+          to see how scientific variables affect results.
+        </div>
+
+        <!-- EXISTING EXPERIMENTS:
+             DO NOT DELETE THE CAR -->
+
+        <div class="experiment-grid">
+
+          <!-- ELECTRIC CIRCUIT -->
+
+          <article class="experiment-card"
+                   data-category="physics"
+                   data-recommended="middle secondary senior college">
+
+            <div class="experiment-visual electric">💡</div>
+
+            <div class="experiment-info">
+              <span class="tag">PHYSICS</span>
+              <span class="difficulty">Interactive</span>
+
+              <h3>Electric Circuit Simulator</h3>
+
+              <p>
+                Explore voltage, resistance, current
+                and bulb brightness using Ohm's law.
+              </p>
+
+              <button class="experiment-btn"
+                      data-experiment="circuit">
+                ▶ Start
+              </button>
+            </div>
+
+          </article>
+
+          <!-- FORCE AND MOTION: CAR -->
+
+          <article class="experiment-card"
+                   data-category="physics"
+                   data-recommended="primary middle secondary senior college">
+
+            <div class="experiment-visual electric">🚗</div>
+
+            <div class="experiment-info">
+              <span class="tag">PHYSICS</span>
+              <span class="difficulty">3D Simulation</span>
+
+              <h3>Force and Motion</h3>
+
+              <p>
+                Drive a 3D car, change force and mass,
+                and explore Newton's second law.
+              </p>
+
+              <button class="experiment-btn"
+                      data-experiment="motion">
+                ▶ Start
+              </button>
+            </div>
+
+          </article>
+
+          <!-- LIGHT REFLECTION -->
+
+          <article class="experiment-card"
+                   data-category="physics"
+                   data-recommended="middle secondary senior college">
+
+            <div class="experiment-visual electric">🔦</div>
+
+            <div class="experiment-info">
+              <span class="tag">PHYSICS</span>
+              <span class="difficulty">Interactive</span>
+
+              <h3>Light Reflection</h3>
+
+              <p>
+                Direct a light ray at a mirror
+                and investigate reflection angles.
+              </p>
+
+              <button class="experiment-btn"
+                      data-experiment="reflection">
+                ▶ Start
+              </button>
+            </div>
+
+          </article>
+
+          <!-- PROJECTILE MOTION -->
+
+          <article class="experiment-card"
+                   data-category="physics"
+                   data-recommended="secondary senior college">
+
+            <div class="experiment-visual electric">🏀</div>
+
+            <div class="experiment-info">
+              <span class="tag">PHYSICS</span>
+              <span class="difficulty">3D Simulation</span>
+
+              <h3>Projectile Motion Simulator</h3>
+
+              <p>
+                Launch a ball and explore trajectory,
+                maximum height and range.
+              </p>
+
+              <button class="experiment-btn"
+                      data-experiment="projectile">
+                ▶ Start
+              </button>
+            </div>
+
+          </article>
+
+          <!-- FLOATING AND SINKING -->
+
+          <article class="experiment-card"
+                   data-category="physics"
+                   data-recommended="primary middle secondary">
+
+            <div class="experiment-visual electric">🚢</div>
+
+            <div class="experiment-info">
+              <span class="tag">PHYSICS</span>
+              <span class="difficulty">Interactive</span>
+
+              <h3>Floating or Sinking</h3>
+
+              <p>
+                Test objects in water and explore
+                density and buoyancy.
+              </p>
+
+              <button class="experiment-btn"
+                      data-experiment="floating">
+                ▶ Start
+              </button>
+            </div>
+
+          </article>
+
+          <!-- ADVANCED CIRCUIT -->
+
+          <article class="experiment-card"
+                   data-category="physics"
+                   data-recommended="senior college">
+
+            <div class="experiment-visual electric">🔋</div>
+
+            <div class="experiment-info">
+              <span class="tag">PHYSICS</span>
+              <span class="difficulty">Advanced</span>
+
+              <h3>Advanced Circuit Analysis</h3>
+
+              <p>
+                Compare series and parallel circuits,
+                equivalent resistance and current.
+              </p>
+
+              <button class="experiment-btn"
+                      data-experiment="advancedCircuit">
+                ▶ Start
+              </button>
+            </div>
+
+          </article>
+
+          <!-- CHEMISTRY -->
+
+          <article class="experiment-card"
+                   data-category="chemistry"
+                   data-recommended="middle secondary senior college">
+
+            <div class="experiment-visual chemistry">🧪</div>
+
+            <div class="experiment-info">
+              <span class="tag">CHEMISTRY</span>
+              <span class="difficulty">Interactive</span>
+
+              <h3>pH Indicator Laboratory</h3>
+
+              <p>
+                Explore acidic, basic and neutral
+                solutions using a pH indicator.
+              </p>
+
+              <button class="experiment-btn"
+                      data-experiment="ph">
+                ▶ Start
+              </button>
+            </div>
+
+          </article>
+
+          <!-- BIOLOGY -->
+
+          <article class="experiment-card"
+                   data-category="biology"
+                   data-recommended="primary middle secondary">
+
+            <div class="experiment-visual biology">🌱</div>
+
+            <div class="experiment-info">
+              <span class="tag">BIOLOGY</span>
+              <span class="difficulty">3D Simulation</span>
+
+              <h3>Plant Growth Simulator</h3>
+
+              <p>
+                Change sunlight and water to
+                explore plant growth.
+              </p>
+
+              <button class="experiment-btn"
+                      data-experiment="plant">
+                ▶ Start
+              </button>
+            </div>
+
+          </article>
+
+          <!-- MATHEMATICS -->
+
+          <article class="experiment-card"
+                   data-category="mathematics"
+                   data-recommended="middle secondary senior college">
+
+            <div class="experiment-visual mathematics">📈</div>
+
+            <div class="experiment-info">
+              <span class="tag">MATHEMATICS</span>
+              <span class="difficulty">Interactive</span>
+
+              <h3>Graph Explorer</h3>
+
+              <p>
+                Explore mathematical functions
+                by adjusting graph coefficients.
+              </p>
+
+              <button class="experiment-btn"
+                      data-experiment="graph">
+                ▶ Start
+              </button>
+            </div>
+
+          </article>
+
+          <!-- physics.js automatically adds
+               14 more Physics experiments here -->
+
+        </div>
+
+      </section>
+
+      <!-- EXPERIMENT WORKSPACE -->
+
+      <section id="experimentWorkspace" class="page">
+
+        <button class="back-btn"
+                data-go="laboratory">
+          ← Back to Laboratory
+        </button>
+
+        <div class="page-intro">
+
+          <span class="eyebrow">
+            INTERACTIVE VIRTUAL EXPERIMENT
+          </span>
+
+          <h1 id="activeExperimentTitle">
+            Experiment
+          </h1>
+
+          <p id="activeExperimentDescription">
+            Adjust the controls to explore science.
+          </p>
+
+        </div>
+
+        <div class="simulation-layout">
+
+          <div class="simulation-panel">
+
+            <div class="panel-header">
+              <h3>Simulation Workspace</h3>
+              <span class="live-label">
+                ● INTERACTIVE
+              </span>
+            </div>
+
+            <div id="simulationCanvas"
+                 class="simulation-canvas">
+            </div>
+
+          </div>
+
+          <div class="control-panel">
+
+            <div class="panel-header">
+              <h3>Experiment Controls</h3>
+            </div>
+
+            <div id="experimentControls"></div>
+
+            <div id="experimentResults"
+                 class="results-box">
+            </div>
+
+            <button id="completeExperiment"
+                    class="primary-btn full-width">
+              Complete Experiment ✓
+            </button>
+
+          </div>
+
+        </div>
+
+        <div class="learning-panel">
+
+          <h3>📖 Science Behind the Experiment</h3>
+
+          <div id="experimentExplanation"></div>
+
+        </div>
+
+      </section>
+
+      <!-- SUBJECTS PAGE -->
+
+      <section id="subjects" class="page">
+
+        <div class="page-intro">
+          <span class="eyebrow">EXPLORE SCIENCE</span>
+          <h1>STEM Subjects</h1>
+          <p>Choose your field of discovery.</p>
+        </div>
+
+        <div class="subject-grid subjects-page-grid">
+
+          <button class="subject-card physics"
+                  data-subject="physics">
+            <div class="subject-emoji">⚛️</div>
+            <span>PHYSICS LABORATORY</span>
+            <h3>Physics</h3>
+            <p>Electricity, mechanics, light and waves.</p>
+            <strong>Start Learning ↗</strong>
+          </button>
+
+          <button class="subject-card chemistry"
+                  data-subject="chemistry">
+            <div class="subject-emoji">🧪</div>
+            <span>CHEMISTRY LABORATORY</span>
+            <h3>Chemistry</h3>
+            <p>Solutions, molecules and reactions.</p>
+            <strong>Start Learning ↗</strong>
+          </button>
+
+          <button class="subject-card biology"
+                  data-subject="biology">
+            <div class="subject-emoji">🧬</div>
+            <span>BIOLOGY LABORATORY</span>
+            <h3>Biology</h3>
+            <p>Cells, plants and living organisms.</p>
+            <strong>Start Learning ↗</strong>
+          </button>
+
+          <button class="subject-card mathematics"
+                  data-subject="mathematics">
+            <div class="subject-emoji">📐</div>
+            <span>MATHEMATICS LABORATORY</span>
+            <h3>Mathematics</h3>
+            <p>Functions, geometry and graphs.</p>
+            <strong>Start Learning ↗</strong>
+          </button>
+
+        </div>
+
+      </section>
+
+      <!-- QUIZ ARENA -->
+
+      <section id="quiz" class="page">
+
+        <div class="page-intro">
+          <span class="eyebrow">
+            CHALLENGE YOUR KNOWLEDGE
+          </span>
+          <h1>Quiz Arena 🧠</h1>
+          <p>
+            Answer questions and earn knowledge points.
+          </p>
+        </div>
+
+        <div class="quiz-container">
+
+          <div id="quizStart" class="quiz-start">
+
+            <div class="quiz-illustration">🎯</div>
+
+            <h2>Ready for a STEM Challenge?</h2>
+
+            <p>
+              Test your knowledge across STEM subjects.
+            </p>
+
+            <p id="quizLevelInfo"
+               class="quiz-level-info">
+              Questions for your selected level.
+            </p>
+
+            <label for="quizSubject">
+              Choose a Subject
+            </label>
+
+            <select id="quizSubject">
+              <option value="all">Mixed STEM</option>
+              <option value="physics">Physics</option>
+              <option value="chemistry">Chemistry</option>
+              <option value="biology">Biology</option>
+              <option value="mathematics">Mathematics</option>
+            </select>
+
+            <button id="startQuizBtn"
+                    class="primary-btn">
+              Start Challenge →
+            </button>
+
+          </div>
+
+          <div id="quizGame"
+               class="quiz-game hidden">
+
+            <div class="quiz-progress-header">
+              <span id="questionCounter">Question 1</span>
+              <span id="quizScore">Score: 0</span>
+            </div>
+
+            <div class="progress-track">
+              <div id="quizProgressBar"
+                   class="progress-fill"></div>
+            </div>
+
+            <h2 id="questionText"></h2>
+
+            <div id="answerOptions"
+                 class="answer-options"></div>
+
+            <p id="answerFeedback"></p>
+
+            <button id="nextQuestionBtn"
+                    class="primary-btn hidden">
+              Next Question →
+            </button>
+
+          </div>
+
+          <div id="quizResult"
+               class="quiz-result hidden">
+
+            <div class="quiz-illustration">🏆</div>
+
+            <h2>Challenge Completed!</h2>
+
+            <p id="finalScore"></p>
+            <p id="quizReward"></p>
+
+            <button id="retryQuizBtn"
+                    class="primary-btn">
+              Try Another Quiz →
+            </button>
+
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- ACHIEVEMENTS -->
+
+      <section id="achievements" class="page">
+
+        <div class="page-intro">
+          <span class="eyebrow">
+            CELEBRATE YOUR PROGRESS
+          </span>
+          <h1>Achievements 🏆</h1>
+          <p>
+            Earn badges as you explore science.
+          </p>
+        </div>
+
+        <div class="achievement-summary">
+
+          <div>
+            <span>TOTAL KNOWLEDGE POINTS</span>
+            <h2 id="achievementPoints">0</h2>
+          </div>
+
+          <div>
+            <span>BADGES UNLOCKED</span>
+            <h2 id="achievementBadgeCount">0 / 4</h2>
+          </div>
+
+        </div>
+
+        <div class="badges-grid">
+
+          <div class="badge-card locked"
+               data-badge="firstExperiment">
+            <div class="badge-icon">🔬</div>
+            <h3>First Discovery</h3>
+            <p>Complete your first experiment.</p>
+            <span class="badge-status">Locked</span>
+          </div>
+
+          <div class="badge-card locked"
+               data-badge="scientist">
+            <div class="badge-icon">⚗️</div>
+            <h3>Young Scientist</h3>
+            <p>Complete four experiments.</p>
+            <span class="badge-status">Locked</span>
+          </div>
+
+          <div class="badge-card locked"
+               data-badge="quizMaster">
+            <div class="badge-icon">🧠</div>
+            <h3>Quiz Master</h3>
+            <p>Score 100% in a quiz.</p>
+            <span class="badge-status">Locked</span>
+          </div>
+
+          <div class="badge-card locked"
+               data-badge="explorer">
+            <div class="badge-icon">🌟</div>
+            <h3>STEM Explorer</h3>
+            <p>Earn 200 knowledge points.</p>
+            <span class="badge-status">Locked</span>
+          </div>
+
+        </div>
+
+      </section>
+
+    </main>
+
+  </div>
+
+  <!-- NOTIFICATIONS -->
+
+  <div id="toast"
+       class="toast hidden"
+       role="status"
+       aria-live="polite"></div>
+
+  <!-- JAVASCRIPT FILES -->
+
+  <script src="script.js" defer></script>
+  <script src="visuals.js" defer></script>
+  <script src="physics.js" defer></script>
+  <script src="chemistry.js" defer></script>
+  <script src="maths.js" defer></script>
+  <script src="quiz.js" defer></script>
+
+
+</body>
+</html>
